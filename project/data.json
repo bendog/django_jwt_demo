@@ -1,0 +1,107 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "geese",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "dudes",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "classy_ladies",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$180000$6b51LZ7Ec60s$NL+lvLddhxuQzSdn0OWK351IXRphBoVufzSgF1TTMSQ=",
+    "last_login": "2019-11-23T03:23:22Z",
+    "is_superuser": true,
+    "username": "bendog",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-11-23T02:42:17Z",
+    "groups": [
+      [
+        "dudes"
+      ],
+      [
+        "classy_ladies"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "test1",
+    "first_name": "",
+    "last_name": "",
+    "email": "nope@nope.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-11-23T02:54:51.196Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "test2",
+    "first_name": "",
+    "last_name": "",
+    "email": "goose@nope.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-11-23T03:57:51Z",
+    "groups": [
+      [
+        "geese"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "app.profile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "bendog"
+    ],
+    "date_of_birth": "1999-12-31",
+    "nick_name": "the artist formerly known as"
+  }
+},
+{
+  "model": "app.profile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "test2"
+    ],
+    "date_of_birth": "1974-04-28",
+    "nick_name": "bruce"
+  }
+}
+]
