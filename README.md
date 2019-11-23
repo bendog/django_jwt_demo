@@ -1,5 +1,13 @@
 # Django JWT Demo
 
+## references
+
+Getting DRF setup  
+<https://www.django-rest-framework.org/tutorial/quickstart/>
+
+Setting up JWT authentication for Django + DRF  
+<https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html>
+
 ## Install packages
 
 ### with pipenv
