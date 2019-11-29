@@ -10,10 +10,7 @@ USE_HTTPS = False
 
 
 def send_password_reset_email(user):
-    form = PasswordResetForm({"email": user.email})
-    form.is_valid()
-    form.save()
-    form.send_mail(
+    PasswordResetForm().send_mail(
         subject_template_name='registration/password_reset_subject.txt',
         email_template_name='registration/password_reset_email.html',
         context={

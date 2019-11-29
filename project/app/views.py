@@ -8,6 +8,7 @@ from rest_framework.decorators import action
 from .permissions import IsAdminOrSelf
 from .serializers import UserSerializer, GroupSerializer, ProfileSerializer, PasswordSerializer
 from .models import Profile
+from .helpers import send_password_reset_email
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -16,6 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.none()
     serializer_class = UserSerializer
+
     # permission_classes = (IsAuthenticated, IsAdminUser)
 
     def get_queryset(self):
@@ -40,6 +42,14 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'status': 'password set'}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['get'], detail=True, permission_classes=[IsAdminOrSelf])
+    def reset_password(self, request, pk=None):
+        """ set the user password """
+        user = self.get_object()
+        send_password_reset_email(user)
+
+        return Response({'status': 'password reset'}, status=status.HTTP_200_OK)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

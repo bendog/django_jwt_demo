@@ -3,7 +3,7 @@ from django.db import transaction
 from rest_framework import serializers
 
 from .models import Profile
-from app.helpers import send_password_reset_email
+from .helpers import send_password_reset_email
 
 
 class ProfileSerializer(serializers.ModelSerializer):
