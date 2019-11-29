@@ -3,6 +3,7 @@ from django.db import transaction
 from rest_framework import serializers
 
 from .models import Profile
+from app.helpers import send_password_reset_email
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -43,6 +44,10 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         # update the user profile
         Profile.objects.filter(user=user).update(**profile_data)
+
+        # send user password setup email
+        send_password_reset_email(user)
+        return user
 
     def update(self, instance, validated_data):
         # remove the profile data
