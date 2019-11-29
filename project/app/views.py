@@ -14,9 +14,19 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.none()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    # permission_classes = (IsAuthenticated, IsAdminUser)
+
+    def get_queryset(self):
+        # if the user is admin, return all the users
+        if self.request.user.is_superuser:
+            return User.objects.all().order_by('-date_joined')
+        # if the user is logged in, return only the active user
+        if self.request.user:
+            return User.objects.filter(pk=self.request.user.pk)
+        # if there is no user, return no results
+        return User.objects.none()
 
     @action(methods=['post'], detail=True, permission_classes=[IsAdminOrSelf])
     def set_password(self, request, pk=None):
@@ -30,7 +40,6 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'status': 'password set'}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
