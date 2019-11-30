@@ -15,13 +15,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        exclude = ['user']
+        exclude = ["user"]
 
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ['url', 'name']
+        fields = ["url", "name"]
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def create(self, validated_data):
         # remove the profile data
-        profile_data = validated_data.pop('profile')
+        profile_data = validated_data.pop("profile")
         # create user from validated data
         user = User(**validated_data)
 
@@ -52,12 +52,12 @@ class UserSerializer(serializers.ModelSerializer):
         Profile.objects.filter(user=user).update(**profile_data)
 
         # send user password setup email
-        send_password_reset_email(user)
+        # send_password_reset_email(user)
         return user
 
     def update(self, instance, validated_data):
         # remove the profile data
-        profile_data = validated_data.pop('profile')
+        profile_data = validated_data.pop("profile")
         # run the normal update process
         super().update(instance, validated_data)
         # handle extra profile information
@@ -70,4 +70,5 @@ class PasswordSerializer(serializers.Serializer):
     """
     Serializer for password change endpoint.
     """
+
     new_password = serializers.CharField(required=True)

@@ -6,6 +6,7 @@ User = get_user_model()
 
 # Create your models here.
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField("Date of birth", auto_now=False, auto_now_add=False, null=True)
