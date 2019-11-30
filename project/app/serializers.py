@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email', 'first_name', 'last_name', 'groups', 'profile']
+        fields = ["id", "url", "username", "email", "first_name", "last_name", "is_active", "groups", "profile"]
 
     @transaction.atomic
     def create(self, validated_data):
@@ -38,8 +38,14 @@ class UserSerializer(serializers.ModelSerializer):
         profile_data = validated_data.pop('profile')
         # create user from validated data
         user = User(**validated_data)
+
         # set user password to blank
         user.set_unusable_password()
+
+        # if you wanted to set the password you could use these lines
+        # user.set_password(validated_data.get('password'))
+        # user.is_active = False
+
         # save the user
         user.save()
         # update the user profile
